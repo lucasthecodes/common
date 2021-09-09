@@ -338,7 +338,7 @@
       "required": [
         "location",
         "keyword",
-        "keyword_type",
+        "keywordType",
         "text",
         "id"
       ],
@@ -352,14 +352,14 @@
           "type": "string"
         },
         "keywordType": {
-          "description": "The keyword as it is known in the Gherkin grammar that the value from the `keyword` field is associated with.",
+          "description": "The test phase signalled by the keyword: Contex definition (Given), Action performance (When), Outcome assertion (Then). Other keywords signal Continuation (And and But) from a prior keyword. Lastly, the `*` 'keyword` isn't associated with a specific phase; hence the association to 'General'.",
           "type": "string",
           "enum": [
-            "Given",
-            "When",
-            "Then",
-            "But",
-            "And"
+            "Context",
+            "Action",
+            "Outcome",
+            "Conjunction",
+            "General"
           ]
         },
         "text": {

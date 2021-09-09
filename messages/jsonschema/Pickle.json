@@ -26,6 +26,7 @@
         "astNodeIds",
         "id",
         "keyword",
+        "keywordType",
         "text"
       ],
       "properties": {
@@ -44,12 +45,18 @@
           "type": "string"
         },
         "keyword": {
-          "description": "The context in which the step was specified: context (Given), action (When) or outcome (Then).\n\nNote that the keywords `But` and `And` inherit their contextual meaning from prior steps and can therefore not appear in the pickle (as the picle is considered to be the execution plan).",
+          "description": "The keyword as it appears in the feature file",
+          "type": "string"
+        },
+        "keywordType": {
+          "description": "The context in which the step was specified: context (Given), action (When) or outcome (Then).\n\nNote that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence General)",
           "type": "string",
           "enum": [
-            "Given",
-            "When",
-            "Then"
+            "Context",
+            "Action",
+            "Outcome",
+            "Conjunction",
+            "General"
           ]
         },
         "text": {

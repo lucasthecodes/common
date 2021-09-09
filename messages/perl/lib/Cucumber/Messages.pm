@@ -1637,22 +1637,22 @@ has keyword =>
 
 =head4 keyword_type
 
-The keyword as it is known in the Gherkin grammar that the value from the `keyword` field is associated with.
+The test phase signalled by the keyword: Contex definition (Given), Action performance (When), Outcome assertion (Then). Other keywords signal Continuation (And and But) from a prior keyword. Lastly, the `*` 'keyword` isn't associated with a specific phase; hence the association to 'General'.
 
 
 Available constants for valid values of this field:
 
 =over
 
-=item * KEYWORD_TYPE_GIVEN
+=item * KEYWORDTYPE_CONTEXT
 
-=item * KEYWORD_TYPE_WHEN
+=item * KEYWORDTYPE_ACTION
 
-=item * KEYWORD_TYPE_THEN
+=item * KEYWORDTYPE_OUTCOME
 
-=item * KEYWORD_TYPE_BUT
+=item * KEYWORDTYPE_CONJUNCTION
 
-=item * KEYWORD_TYPE_AND
+=item * KEYWORDTYPE_GENERAL
 
 =back
 
@@ -1660,17 +1660,17 @@ Available constants for valid values of this field:
 
 
 use constant
-   KEYWORD_TYPE_GIVEN => 'Given',
-   KEYWORD_TYPE_WHEN => 'When',
-   KEYWORD_TYPE_THEN => 'Then',
-   KEYWORD_TYPE_BUT => 'But',
-   KEYWORD_TYPE_AND => 'And',
+   KEYWORDTYPE_CONTEXT => 'Context',
+   KEYWORDTYPE_ACTION => 'Action',
+   KEYWORDTYPE_OUTCOME => 'Outcome',
+   KEYWORDTYPE_CONJUNCTION => 'Conjunction',
+   KEYWORDTYPE_GENERAL => 'General',
    ;
 
 has keyword_type =>
     (is => 'ro',
      required => 1,
-     default => sub { KEYWORD_TYPE_GIVEN },
+     default => sub { KEYWORDTYPE_CONTEXT },
     );
 
 
@@ -2791,7 +2791,8 @@ my %types = (
    argument => 'Cucumber::Messages::PickleStepArgument',
    ast_node_ids => '[]string',
    id => 'string',
-   keyword => '',
+   keyword => 'string',
+   keyword_type => '',
    text => 'string',
 );
 
@@ -2842,20 +2843,37 @@ has id =>
 
 =head4 keyword
 
+The keyword as it appears in the feature file
+
+=cut
+
+has keyword =>
+    (is => 'ro',
+     required => 1,
+     default => sub { '' },
+    );
+
+
+=head4 keyword_type
+
 The context in which the step was specified: context (Given), action (When) or outcome (Then).
 
-Note that the keywords `But` and `And` inherit their contextual meaning from prior steps and can therefore not appear in the pickle (as the picle is considered to be the execution plan).
+Note that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence General)
 
 
 Available constants for valid values of this field:
 
 =over
 
-=item * KEYWORD_GIVEN
+=item * KEYWORDTYPE_CONTEXT
 
-=item * KEYWORD_WHEN
+=item * KEYWORDTYPE_ACTION
 
-=item * KEYWORD_THEN
+=item * KEYWORDTYPE_OUTCOME
+
+=item * KEYWORDTYPE_CONJUNCTION
+
+=item * KEYWORDTYPE_GENERAL
 
 =back
 
@@ -2863,15 +2881,17 @@ Available constants for valid values of this field:
 
 
 use constant
-   KEYWORD_GIVEN => 'Given',
-   KEYWORD_WHEN => 'When',
-   KEYWORD_THEN => 'Then',
+   KEYWORDTYPE_CONTEXT => 'Context',
+   KEYWORDTYPE_ACTION => 'Action',
+   KEYWORDTYPE_OUTCOME => 'Outcome',
+   KEYWORDTYPE_CONJUNCTION => 'Conjunction',
+   KEYWORDTYPE_GENERAL => 'General',
    ;
 
-has keyword =>
+has keyword_type =>
     (is => 'ro',
      required => 1,
-     default => sub { KEYWORD_GIVEN },
+     default => sub { KEYWORDTYPE_CONTEXT },
     );
 
 

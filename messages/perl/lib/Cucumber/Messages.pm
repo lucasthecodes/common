@@ -2791,8 +2791,7 @@ my %types = (
    argument => 'Cucumber::Messages::PickleStepArgument',
    ast_node_ids => '[]string',
    id => 'string',
-   keyword => 'string',
-   keyword_type => '',
+   type => '',
    text => 'string',
 );
 
@@ -2841,39 +2840,24 @@ has id =>
     );
 
 
-=head4 keyword
-
-The keyword as it appears in the feature file
-
-=cut
-
-has keyword =>
-    (is => 'ro',
-     required => 1,
-     default => sub { '' },
-    );
-
-
-=head4 keyword_type
+=head4 type
 
 The context in which the step was specified: context (Given), action (When) or outcome (Then).
 
-Note that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence General)
+Note that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence Unknown)
 
 
 Available constants for valid values of this field:
 
 =over
 
-=item * KEYWORDTYPE_CONTEXT
+=item * TYPE_CONTEXT
 
-=item * KEYWORDTYPE_ACTION
+=item * TYPE_ACTION
 
-=item * KEYWORDTYPE_OUTCOME
+=item * TYPE_OUTCOME
 
-=item * KEYWORDTYPE_CONJUNCTION
-
-=item * KEYWORDTYPE_GENERAL
+=item * TYPE_UNKNOWN
 
 =back
 
@@ -2881,17 +2865,16 @@ Available constants for valid values of this field:
 
 
 use constant
-   KEYWORDTYPE_CONTEXT => 'Context',
-   KEYWORDTYPE_ACTION => 'Action',
-   KEYWORDTYPE_OUTCOME => 'Outcome',
-   KEYWORDTYPE_CONJUNCTION => 'Conjunction',
-   KEYWORDTYPE_GENERAL => 'General',
+   TYPE_CONTEXT => 'Context',
+   TYPE_ACTION => 'Action',
+   TYPE_OUTCOME => 'Outcome',
+   TYPE_UNKNOWN => 'Unknown',
    ;
 
-has keyword_type =>
+has type =>
     (is => 'ro',
      required => 1,
-     default => sub { KEYWORDTYPE_CONTEXT },
+     default => sub { TYPE_CONTEXT },
     );
 
 

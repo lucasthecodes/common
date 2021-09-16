@@ -25,8 +25,7 @@
       "required": [
         "astNodeIds",
         "id",
-        "keyword",
-        "keywordType",
+        "type",
         "text"
       ],
       "properties": {
@@ -44,19 +43,14 @@
           "description": "A unique ID for the PickleStep",
           "type": "string"
         },
-        "keyword": {
-          "description": "The keyword as it appears in the feature file",
-          "type": "string"
-        },
-        "keywordType": {
-          "description": "The context in which the step was specified: context (Given), action (When) or outcome (Then).\n\nNote that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence General)",
+        "type": {
+          "description": "The context in which the step was specified: context (Given), action (When) or outcome (Then).\n\nNote that the keywords `But` and `And` inherit their meaning from prior steps and the `*` 'keyword' doesn't have specific meaning (hence Unknown)",
           "type": "string",
           "enum": [
             "Context",
             "Action",
             "Outcome",
-            "Conjunction",
-            "General"
+            "Unknown"
           ]
         },
         "text": {
